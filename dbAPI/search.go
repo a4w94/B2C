@@ -9,4 +9,6 @@ type Condition struct {
 	Value   interface{}
 }
 
+func (d DBinfo) SearchByQuery(q Search) {
 
+}

@@ -51,22 +51,22 @@ type User struct {
 type DBinfo struct {
 	DB        *gorm.DB
 	TableName string
-	Table     interface{}
+	Info      interface{}
 }
 
-func (d *DBinfo) CreatTable() {
-	d.DB.Table(d.TableName).Migrator().CreateTable(&d.Table)
+func (d DBinfo) CreatTable() {
+	d.DB.Table(d.TableName).Migrator().CreateTable(&d.Info)
 	fmt.Printf("DataBase:%s Create Table %s\n", Database, d.TableName)
 
 }
 
-func (d *DBinfo) DropTable() {
+func (d DBinfo) DropTable() {
 	d.DB.Migrator().DropTable(d.TableName)
 	fmt.Printf("DataBase:%s Delete Table %s\n", Database, d.TableName)
 
 }
 
-func (d *DBinfo) CheckTableExist() {
+func (d DBinfo) CheckTableExist() {
 	isExist := d.DB.Migrator().HasTable(d.TableName)
 
 	if isExist {
