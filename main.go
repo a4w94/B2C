@@ -7,6 +7,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 const (
@@ -14,6 +16,10 @@ const (
 	htmlroute = "template/html/*"
 )
 
+// @title Gin Swagger Demo
+// @version 1.0
+// @description Swagger API.
+// @host localhost:5000
 func main() {
 	APIServerRun()
 
@@ -21,6 +27,9 @@ func main() {
 
 func APIServerRun() {
 	router := InitRouter()
+	url := ginSwagger.URL("http://localhost:5000/swagger/doc.json") // The url pointing to API definition
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
+
 	fmt.Println("Route:", "localhost", port)
 	s := &http.Server{
 		Addr:           port,
