@@ -1,14 +1,15 @@
 package main
 
 import (
-	"b2c/server"
 	"fmt"
-
 	"net/http"
 
+	docs "b2c/docs"
+	"b2c/server"
+
 	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
 const (
@@ -16,19 +17,29 @@ const (
 	htmlroute = "template/html/*"
 )
 
-// @title Gin Swagger Demo
-// @version 1.0
-// @description Swagger API.
-// @host localhost:5000
+// @BasePath /api/v1
+
+// PingExample godoc
+// @Summary ping example
+// @Schemes
+// @Description do ping
+// @Tags example
+// @Accept json
+// @Produce json
+// @Success 200 {string} Helloworld
+// @Router /hello [get]
+func Helloworld(g *gin.Context) {
+	g.JSON(http.StatusOK, "helloworld")
+}
+
 func main() {
+
 	APIServerRun()
 
 }
 
 func APIServerRun() {
 	router := InitRouter()
-	url := ginSwagger.URL("http://localhost:5000/swagger/doc.json") // The url pointing to API definition
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
 	fmt.Println("Route:", "localhost", port)
 	s := &http.Server{
@@ -41,6 +52,8 @@ func APIServerRun() {
 
 func InitRouter() *gin.Engine {
 	r := gin.New()
+	docs.SwaggerInfo.BasePath = "/api/v1"
+
 	r.RedirectFixedPath = true
 
 	// r.LoadHTMLGlob(htmlroute)
@@ -53,7 +66,10 @@ func InitRouter() *gin.Engine {
 	{
 		//新建标签
 		apiv1.POST("/newcommodity", server.NewCommodity)
+		apiv1.GET("/hello", Helloworld)
 
 	}
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 	return r
 }

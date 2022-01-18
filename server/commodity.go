@@ -13,8 +13,17 @@ type Test struct {
 	User string `form:"user"`
 }
 
+// @Summary      Show an account
+// @Description  get string by ID
+// @Tags         accounts
+// @Accept       json
+// @Produce      json
+// @Param        id   int  int  true  "ID"
+// @Success      200  string string 成功後返回的值
+// @Router       /newcommodity [post]
 func NewCommodity(c *gin.Context) {
 	var tmp dbAPI.Commodity
+	fmt.Println(c.PostForm("id"))
 
 	c.Bind(&tmp)
 	fmt.Println(&tmp)
