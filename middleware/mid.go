@@ -13,8 +13,11 @@ func NewCommodity(info dbAPI.Commodity) dbAPI.Commodity {
 	check := tmp.NewCommodity(info)
 	if check == "Success" {
 		info.Code = 200
+		info.Status = "商品新增成功"
 	} else {
 		info.Code = 400
+		info.Status = "商品新增失敗"
+
 	}
 	return info
 }

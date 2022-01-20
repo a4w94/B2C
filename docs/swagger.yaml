@@ -20,14 +20,33 @@ paths:
   /newcommodity:
     post:
       consumes:
-      - application/json
-      description: get string by ID
+      - application/x-www-form-urlencoded
+      description: 新增商品
       parameters:
-      - description: ID
+      - description: id
         in: formData
         name: id
         required: true
         type: integer
+      - description: Cate_ID
+        in: formData
+        name: cate_id
+        required: true
+        type: integer
+      - description: 數量
+        in: formData
+        name: amount
+        required: true
+        type: integer
+      - description: Price
+        in: formData
+        name: price
+        required: true
+        type: integer
+      - description: title
+        in: formData
+        name: title
+        type: string
       produces:
       - application/json
       responses:
@@ -35,7 +54,7 @@ paths:
           description: OK
           schema:
             type: string
-      summary: Show an account
+      summary: 新增
       tags:
-      - accounts
+      - New
 swagger: "2.0"

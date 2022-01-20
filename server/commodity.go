@@ -13,12 +13,16 @@ type Test struct {
 	User string `form:"user"`
 }
 
-// @Summary      Show an account
-// @Description  get string by ID
-// @Tags         accounts
-// @Accept       json
+// @Summary      新增
+// @Description  新增商品
+// @Tags         New
+// @Accept  	 application/x-www-form-urlencoded
 // @Produce      json
-// @Param        id   int  int  true  "ID"
+// @Param        id  formData  int  true  "id"
+// @Param        cate_id  formData  int  true  "Cate_ID"
+// @Param        amount  formData  int  true  "數量"
+// @Param        price formData  int  true  "Price"
+// @Param        title formData  string  false  "title"
 // @Success      200  string string 成功後返回的值
 // @Router       /newcommodity [post]
 func NewCommodity(c *gin.Context) {

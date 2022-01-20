@@ -30,24 +30,51 @@
         },
         "/newcommodity": {
             "post": {
-                "description": "get string by ID",
+                "description": "新增商品",
                 "consumes": [
-                    "application/json"
+                    "application/x-www-form-urlencoded"
                 ],
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "accounts"
+                    "New"
                 ],
-                "summary": "Show an account",
+                "summary": "新增",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "ID",
+                        "description": "id",
                         "name": "id",
                         "in": "formData",
                         "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Cate_ID",
+                        "name": "cate_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "數量",
+                        "name": "amount",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Price",
+                        "name": "price",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "formData"
                     }
                 ],
                 "responses": {
